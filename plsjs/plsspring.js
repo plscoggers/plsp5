@@ -4,14 +4,13 @@ function setup()
 {
     createCanvas(400,400);
     x = width / 2 - 10;
-    k = 2;
-    m = 100;
-    f = 0;
-    a = 0;
-    v = 0;
-    r = 40;
-    d = 0.92;
-    //d = 0.92;
+    k = 2;  //spring constant k pls F = -k(x-r)
+    m = 100;  //object mass pls F = ma
+    f = 0; //Force 
+    a = 0; //acceleration
+    v = 0;  //velocity
+    r = 40;  //resting position
+    d = 0.92; //dampening v = d * (v + a)
 }
 
 function draw()
@@ -23,11 +22,12 @@ function draw()
     a = f / m;
     v = d * (v + a);
     x += v;
+    //pls don't forever move
     if(abs(v) < 0.001)
     {
         v = 0;
     }
-    //collision detection
+    //pls detect collision
     if(x < 10)
     {
         x = 10;

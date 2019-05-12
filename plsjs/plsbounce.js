@@ -23,6 +23,7 @@ function updatePosition()
     x += vx;
 }
 
+//pls collide
 function collisionCheck()
 {
     if(y >= height - ch / 2)
