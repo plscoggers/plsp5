@@ -70,32 +70,34 @@ class Grid
         }
     }
 
-    fillOrUnfillClickedCell(x,y)
+    getLocs(p)
     {
-        if(x > this.grid_dim || y > this.grid_dim)
-            return;
-        var width_pos = floor(x / this.cell_dim);
-        var height_pos = floor(y / this.cell_dim);
-        this.cell_list[width_pos][height_pos].is_filled = !this.cell_list[width_pos][height_pos].is_filled;
+        return new Point(floor(p.x / this.cell_dim), floor(p.y / this.cell_dim));
     }
 
-    setFill(x,y)
+    boundsCheck(p)
     {
-        if(x > this.grid_dim || y > this.grid_dim)
-            return;
-        var width_pos = floor(x / this.cell_dim);
-        var height_pos = floor(y / this.cell_dim);
-        this.fill = !this.cell_list[width_pos][height_pos].is_filled;
-        this.cell_list[width_pos][height_pos].is_filled = this.fill;
+        if(p.x < this.cell_list.length)
+        {
+            return p.y < this.cell_list[p.x].length;
+        }
+        else
+            return false;
     }
 
-    fillOrUnfillDraggedMouse(x,y)
+    //These two can probably be refactored a bit better
+    setFill(p)
     {
-        if(x > this.grid_dim || y > this.grid_dim)
-            return;
-        var width_pos = floor(x / this.cell_dim);
-        var height_pos = floor(y / this.cell_dim);
-        this.cell_list[width_pos][height_pos].is_filled = this.fill;
+        var pos = this.getLocs(p)
+        if(this.boundsCheck(pos))
+            this.fill = !this.cell_list[pos.x][pos.y].is_filled;
+    }
+
+    fillOrUnfillDraggedMouse(p)
+    {
+        var pos = this.getLocs(p);
+        if(this.boundsCheck(pos))
+            this.cell_list[pos.x][pos.y].is_filled = this.fill;
     }
 }
 
