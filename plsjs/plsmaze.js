@@ -1,4 +1,5 @@
 let grid = new Grid();
+let locked = true;
 
 function setup()
 {
@@ -7,11 +8,22 @@ function setup()
 
 function draw()
 {
-    //grid.debug_test();
     grid.display();
 }
 
-function mouseClicked()
+function mousePressed()
 {
-    grid.fillOrUnfillClickedCell(mouseX, mouseY);
+    locked = false;
+    grid.setFill(mouseX,mouseY);
+}
+
+function mouseDragged()
+{
+    if(!locked)
+        grid.fillOrUnfillDraggedMouse(mouseX, mouseY);
+}
+
+function mouseReleased()
+{
+    locked = true;
 }

@@ -1,6 +1,8 @@
 //Contains all classes related to Grid to later be used for maze solving
 //TODO:
-//1.  Make draggable to fill squares
+//1.  Make draggable to fill squares -- complete
+//2.  Change the 2D array to a 1D array...maybe?
+//3.  Clean up duplicated code for drawing in squares
 
 
 //Point
@@ -44,6 +46,8 @@ class Grid
         this.cell_list = [];
         this.cell_dim = block_height;
         this.grid_dim = canvas_height;
+        this.fill = true;
+        this.invalid = false;
         for(var i = 0; i < canvas_width / block_width; ++i)
         {
             this.cell_list[i] = [];
@@ -73,6 +77,25 @@ class Grid
         var width_pos = floor(x / this.cell_dim);
         var height_pos = floor(y / this.cell_dim);
         this.cell_list[width_pos][height_pos].is_filled = !this.cell_list[width_pos][height_pos].is_filled;
+    }
+
+    setFill(x,y)
+    {
+        if(x > this.grid_dim || y > this.grid_dim)
+            return;
+        var width_pos = floor(x / this.cell_dim);
+        var height_pos = floor(y / this.cell_dim);
+        this.fill = !this.cell_list[width_pos][height_pos].is_filled;
+        this.cell_list[width_pos][height_pos].is_filled = this.fill;
+    }
+
+    fillOrUnfillDraggedMouse(x,y)
+    {
+        if(x > this.grid_dim || y > this.grid_dim)
+            return;
+        var width_pos = floor(x / this.cell_dim);
+        var height_pos = floor(y / this.cell_dim);
+        this.cell_list[width_pos][height_pos].is_filled = this.fill;
     }
 }
 
