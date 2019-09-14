@@ -59,6 +59,19 @@ class Grid
         }
     }
 
+    createGrid()
+    {
+        for(var i = 0; i < this.grid_dim / this.cell_dim; ++i)
+        {
+            this.cell_list[i] = [];
+            for(var j = 0; j < this.grid_dim / this.cell_dim; ++j)
+            {
+                var top_right = new Point(i * this.cell_dim, j * this.cell_dim);
+                this.cell_list[i][j] = new MazeCell(top_right, this.cell_dim, this.cell_dim);
+            }      
+        }
+    }
+
     display()
     {
         for(var i = 0; i < this.cell_list.length; ++i)
@@ -98,6 +111,11 @@ class Grid
         var pos = this.getLocs(p);
         if(this.boundsCheck(pos))
             this.cell_list[pos.x][pos.y].is_filled = this.fill;
+    }
+
+    clearGrid()
+    {
+        this.createGrid();
     }
 }
 

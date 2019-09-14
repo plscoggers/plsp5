@@ -1,9 +1,13 @@
-let grid = new Grid();
+let grid = new Grid(10,10,640,640);
 let locked = true;
 
 function setup()
 {
     createCanvas(1000,1000);
+    frameRate(60);
+    clear_button = createButton('Clear');
+    clear_button.position(0,650);
+    clear_button.mousePressed(clearScreen);
 }
 
 function draw()
@@ -37,4 +41,9 @@ function mouseDragged()
 function mouseReleased()
 {
     locked = true;
+}
+
+function clearScreen()
+{
+    grid.clearGrid();
 }
